@@ -35,5 +35,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
 
-  });
+  }, {
+    timestamps:false //retira los createdAt y updateAt automáticos
+ });
 };

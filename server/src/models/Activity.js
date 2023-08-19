@@ -30,5 +30,7 @@ module.exports = (sequelize) => {
         values:['Summer','Autumn','Winter','Spring'],
         allowNull: false,
     }
-  });
+  }, {
+    timestamps:false //retira los createdAt y updateAt automáticos
+ });
 };

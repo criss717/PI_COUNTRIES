@@ -4,7 +4,13 @@ const {Activity,Country} = require("../db");
 module.exports= async (req,res)=>{
     try {        
         const activities= await Activity.findAll({
-            include:Country // asocia los paises que tiene relación con tabla intermedia   
+            include:{
+                model:Country, // asociacion con el modelo actividad
+                attributes:["id"], //solo mostrar el atributo name, para q no me llene de info
+                through:{ // de la tabla intermedia
+                    attributes:[] // para q no muestre nada
+                }
+            }   
         }); 
         return activities.length > 0 ? res.status(200).json(activities) 
         : res.status(404).send('No existen registros de actividades turisticas')
