@@ -1,0 +1,14 @@
+.container {   
+    background-image: url('../../assets/earth-6213.gif');
+    background-repeat:no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100vw;
+    height: 100vh; 
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;     
+}
+
+

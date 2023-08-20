@@ -4,6 +4,7 @@ const { conn,Country,Activity } = require('./src/db.js');
 const PORT = 3001;
 const saveJsonInDB = require("../server/src/midlewares/saveJsonInBD")
 const dbJson=require('./api/db.json')
+
 conn.sync({ force: true })
   .then(()=>saveJsonInDB(dbJson,Country))
   .then(() => {
