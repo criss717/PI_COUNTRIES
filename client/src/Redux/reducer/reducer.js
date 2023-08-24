@@ -3,7 +3,7 @@ import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER,ORDER } f
 const initialState = { //variables globales
     allCountries:[],
     copyCountries:[],   //servira para el filtrado por noombre
-    countryDetail:[],    
+    countryDetail:{},    
 }
 
 export const rootReducer = (state=initialState,action)=>{
@@ -15,8 +15,8 @@ export const rootReducer = (state=initialState,action)=>{
                 copyCountries:action.payload
             }
         case GET_COUNTRY: //por nombre
-            const result=state.allCountries.filter((country)=>country.name.includes(action.payload))
-            console.log(result);
+            // const result=state.allCountries.filter((country)=>country.name.includes(action.payload))
+            // console.log(result);
             if(action.payload===''){ // si borra el nombre, volvemos a mostar todos
                 return {
                     ...state,
@@ -25,7 +25,12 @@ export const rootReducer = (state=initialState,action)=>{
             }
             return {
                 ...state,
-                allCountries:result,
+                allCountries:action.payload,
+            }
+        case GET_DETAIL:
+            return{
+                ...state,
+                countryDetail:action.payload
             }
     }
 }

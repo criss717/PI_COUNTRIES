@@ -41,6 +41,7 @@ const Cards = () => {
                         <Card name={country.name} // a cada tarjeta le damos las propsenviamos por props los datos del arreglo data
                         continents={country.continents} 
                         imageFlag={country.imageFlag} 
+                        id={country.id}
                         key={country.id}          
                     />)
                 }                

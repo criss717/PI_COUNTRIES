@@ -8,7 +8,7 @@ module.exports= async (req,res)=>{
             const country= await Country.findAll({
                 where:{
                     name: {
-                        [Op.iLike]: name // indiferente a mayusculas y min
+                        [Op.iLike]: `%${name}%` // indiferente a mayusculas y min y busca una coincidencia parcial del nombre q le demos
                     }
                 },
                 include:{

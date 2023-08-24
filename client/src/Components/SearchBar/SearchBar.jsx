@@ -5,11 +5,9 @@ import { getCountry } from '../../Redux/actions/actions';
 const SearchBar = (props) => {
     
     //Handlers
-    const handleChange=(e)=>{        
-        console.log(e.target.value);
-        props.getCountry("")       
+    const handleChange=(e)=>{              
         props.getCountry(e.target.value)
-        if(!e.target.value) props.getCountry("") 
+        if(!e.target.value) props.getCountry("") // cuando vaciamos el input
     }    
 
     return ( 
