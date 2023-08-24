@@ -1,8 +1,19 @@
 .container {
-    display: flex;
+    display: flex;  
+    flex-direction: column;  
     width: 100vw;
-    height: 70vh;
-    overflow-x: scroll;
+    height: 70vh;    
+    align-items: center;    
+}
+
+.cards {
+    display: grid;    
+    grid-template-columns: repeat(5, 1fr);  
+    margin: 2%;      
+}
+
+.buttons{
+    display: flex;
     align-items: center;
-    padding: 20px;
+    margin-top: 2%;
 }
