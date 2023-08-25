@@ -42,3 +42,9 @@ export const getDetail = (id) =>{
         alert(error.message)
     }
 }
+
+export const cleanDetail = ()=>{
+    return {
+        type:CLEAN_DETAIL,        
+    }
+}

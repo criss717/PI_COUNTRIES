@@ -32,5 +32,10 @@ export const rootReducer = (state=initialState,action)=>{
                 ...state,
                 countryDetail:action.payload
             }
+        case CLEAN_DETAIL:
+            return {
+                ...state,
+                countryDetail:{}
+            }
     }
 }
