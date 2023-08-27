@@ -4,3 +4,5 @@ export const GET_DETAIL='GET_DETAIL';
 export const CLEAN_DETAIL='CLEAN_DETAIL'
 export const FILTER='FILTER';
 export const ORDER='ORDER';
+export const POST_ACTIVITY='POST_ACTIVITY'
+export const GET_ACTIVITIES='GET_ACTIVITIES'

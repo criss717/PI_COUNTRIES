@@ -6,6 +6,7 @@ import Cards from './Components/Cards/Cards'
 import SearchBar from './Components/SearchBar/SearchBar'
 import Detail from './Components/Detail/Detail'
 import Form from './Components/Form/form'
+import NavBar from './Components/NavBar/NavBar'
 
 function App() {  
   //hooks
@@ -14,7 +15,7 @@ function App() {
   return (
     <> 
       {
-        location.pathname.includes('/home') && <SearchBar/>
+        location.pathname.includes('/home') && <NavBar/>
       }        
       <Routes>
         <Route path='/' element={<LandingPage/>}/>        

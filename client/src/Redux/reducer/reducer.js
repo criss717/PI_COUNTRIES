@@ -1,9 +1,10 @@
-import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER,ORDER } from "../actions/types";
+import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER,ORDER, POST_ACTIVITY, GET_ACTIVITIES } from "../actions/types";
 
 const initialState = { //variables globales
     allCountries:[],
     copyCountries:[],   //servira para el filtrado por noombre
-    countryDetail:{},    
+    countryDetail:{},
+    activities:{}   
 }
 
 export const rootReducer = (state=initialState,action)=>{
@@ -36,6 +37,20 @@ export const rootReducer = (state=initialState,action)=>{
             return {
                 ...state,
                 countryDetail:{}
+            }
+        case POST_ACTIVITY:
+            return{
+                ...state,
+                //activities:action.payload
+            }
+        case GET_ACTIVITIES:
+            return{
+                ...state,
+                activities:action.payload
+            }
+        default: 
+            return {
+                ...state
             }
     }
 }

@@ -5,8 +5,8 @@ module.exports= async (req,res)=>{
     try {        
         const activities= await Activity.findAll({
             include:{
-                model:Country, // asociacion con el modelo actividad
-                attributes:["id"], //solo mostrar el atributo name, para q no me llene de info
+                model:Country, // asociacion con el modelo Country
+                attributes:["name"], //solo mostrar el atributo name, para q no me llene de info
                 through:{ // de la tabla intermedia
                     attributes:[] // para q no muestre nada
                 }

@@ -2,8 +2,8 @@ const {Activity,Country} = require("../db");
 
 module.exports= async (req,res)=>{
     try {
-        const {name,dificulty,duration,season,countries} = req.body;
-        if(!name,!dificulty,!duration,!season,!countries){
+        const {name,difficulty,duration,season,countries} = req.body;       
+        if(!name,!difficulty,!duration,!season,!countries){
             return res.status(403).send('Faltan datos')
         }
         const existingActivity = await Activity.findAll({ //para validar q no se repita nombre de actividad con un pais
@@ -23,7 +23,7 @@ module.exports= async (req,res)=>{
         // si no hay paises q contengan esta actividad, procedemos a crearla
         const newActivity = await Activity.create({ 
             name,
-            dificulty,
+            difficulty,
             duration,
             season,            
         }) 
