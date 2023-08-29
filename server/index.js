@@ -1,6 +1,5 @@
-const axios = require("axios");
 const server = require("./src/server");
-const { conn,Country,Activity } = require('./src/db.js');
+const { conn,Country} = require('./src/db.js');
 const PORT = 3001;
 const saveJsonInDB = require("../server/src/midlewares/saveJsonInBD")
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanDetail, getDetail } from '../../Redux/actions/actions';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import s from '../Detail/Detail.module.css'
 
 
@@ -10,7 +10,7 @@ const Detail = () => {
     const countryDetail = useSelector((state)=>state.countryDetail) //variable global
     const dispatch= useDispatch() // para accionar el getdetail, y el cleanDetail
     const {id:idDetail}=useParams() // traemos el id q nos viene por params en la URL
-    
+       
     useEffect(()=>{
         dispatch(getDetail(idDetail)) //will did montain
         return ()=>{
@@ -26,9 +26,31 @@ const Detail = () => {
                 <img src={countryDetail.imageFlag} alt=''></img>                
                 <h2>Continents: {countryDetail.continents}</h2>
                 <h3>Capital: {countryDetail.capital}</h3>
-                { countryDetail.subRegion && <h3>SubRegion: {countryDetail.subRegion}</h3>}
+                { countryDetail.subRegion &&  <h3>SubRegion: {countryDetail.subRegion}</h3>}
                 { countryDetail.area && <h3>Area: {countryDetail.area} M2</h3>}
                 <h3>Population: {countryDetail.population} personas</h3>                
+            </div>
+            <div>
+                { //si existen actividades para ese país
+                    countryDetail.Activities &&
+                    countryDetail.Activities.length>0 ? (
+                        <>
+                            <h2>Activities:</h2>
+                            <h3>{countryDetail.Activities[0].name}</h3>
+                            <h3>Season: {countryDetail.Activities[0].season}</h3>
+                            <h3>Duration: {countryDetail.Activities[0].duration}</h3>                      
+                        </>
+                    ):( // si no existen actividades
+                        <>
+                            <h2>There are not tourist activities:</h2>
+                            <Link to='/activities'>
+                                <button>Create Activity</button>
+                            </Link>
+                        </>
+                    )
+
+                }
+                
             </div>
             
         </div>

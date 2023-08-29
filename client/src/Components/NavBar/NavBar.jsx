@@ -5,8 +5,8 @@ const NavBar = () => {
     return (
         <div>
             <SearchBar/>
-            <Link to='/form'>
-                <div>Añadir actividad</div>
+            <Link to='/activities'>
+                <div>Create Activities</div>
             </Link>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postActivity, getActivities } from '../../Redux/actions/actions'
+import s from '../Form/Form.module.css'
 
 
 const Form = () => {
@@ -10,17 +11,19 @@ const Form = () => {
         difficulty: "",
         duration: "",
         season: "",
-        countries: [],
+        countries: [], // para la tabla intermedia, debe contener los id de los paises escogidos        
+        optionsSelected:[] // para mostar las imagenes de las banderas
     })
 
     //hooks
     const countries = useSelector(state => state.allCountries) // accedemos a la variable global 
     const dispatch = useDispatch()
+
     //handlers
-    const onSubmit = (e) => { //enviaremos por body a la URL del back
-        e.preventDefault();
-        dispatch(postActivity(form)) // envaimos el estado form con todos los datos escritos y seleccionados por el user
-        dispatch(getActivities()) 
+    const onSubmit = async (e) => { //enviaremos por body a la URL del back
+        e.preventDefault();        
+        await dispatch(postActivity(form)) 
+        dispatch(getActivities()) // hasta q no se completa el post no obtengo
     }
     const handlerInputsChange = (e) => {     //manejador de inputs
         const property = e.target.name;
@@ -31,14 +34,15 @@ const Form = () => {
         })
     }
     const handlerSelectChange = (e) => { // para la opcion de multiples paises
-        const optionSelected = Array.from(e.target.selectedOptions, option=>option.value) // volvemos un array con los ID de las opciones escogidas
+        const dataCountries = countries.find((country)=>country.id===e.target.value) //filtramos por id, para tener los datos del pais elegido
         setForm({
             ...form,
-            countries:optionSelected
-        })
+            optionsSelected:[...form.optionsSelected,dataCountries],
+            countries:[...form.countries,e.target.value] // guardamos el Id q esta en value de cada option
+        })       
     }
     return (
-        <div>
+        <div className={s.container}>
             <h1>Tourist Activities</h1>
             <form onSubmit={onSubmit}>
                 <label htmlFor='name'>Name of the tourist activity: </label>
@@ -71,8 +75,7 @@ const Form = () => {
                     <option value='Spring'>Spring</option>
                 </select>
                 <label htmlFor='countries'>Countries:</label>
-                <select
-                    multiple // habilita la opción de escoger varios
+                <select                   
                     onChange={handlerSelectChange}
                     name='countries'>
                     {   //mapeamos el arreglo de paises para obtener el nombre en los select
@@ -81,8 +84,18 @@ const Form = () => {
                         )
                     }
                 </select>
-                <button type='submit'>Crear</button>
+                <button type='submit'>Create Activity</button>
             </form>
+            <div>
+                {   //muestra las banderas
+                    form.optionsSelected.length> 0 && //si tiene datos
+                    form.optionsSelected.map((country)=> <img 
+                        src={country.imageFlag}
+                        alt=''
+                        key={country.id}
+                    />)                
+                }               
+            </div>
 
         </div>
     );

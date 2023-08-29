@@ -2,9 +2,9 @@ import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER,ORDER, PO
 
 const initialState = { //variables globales
     allCountries:[],
-    copyCountries:[],   //servira para el filtrado por noombre
+    copyCountries:[],   //servira para el filtrado por noombre search bar
     countryDetail:{},
-    activities:{}   
+    activities:[]   
 }
 
 export const rootReducer = (state=initialState,action)=>{
