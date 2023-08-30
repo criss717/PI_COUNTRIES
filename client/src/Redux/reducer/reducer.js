@@ -15,9 +15,7 @@ export const rootReducer = (state=initialState,action)=>{
                 allCountries:action.payload,
                 copyCountries:action.payload
             }
-        case GET_COUNTRY: //por nombre
-            // const result=state.allCountries.filter((country)=>country.name.includes(action.payload))
-            // console.log(result);
+        case GET_COUNTRY: //por nombre            
             if(action.payload===''){ // si borra el nombre, volvemos a mostar todos
                 return {
                     ...state,

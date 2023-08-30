@@ -4,3 +4,9 @@
     align-items: center;
     padding: 15px;
 }
+
+.container img {
+    height: auto;
+    width: 100%;  
+    aspect-ratio: 1.5/1; /*sirve para la relacion ancho alto*/   
+}

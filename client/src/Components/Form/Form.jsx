@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postActivity, getActivities } from '../../Redux/actions/actions'
 import s from '../Form/Form.module.css'
 
-
 const Form = () => {
     //estados
     const [form, setForm] = useState({
@@ -35,12 +34,22 @@ const Form = () => {
     }
     const handlerSelectChange = (e) => { // para la opcion de multiples paises
         const dataCountries = countries.find((country)=>country.id===e.target.value) //filtramos por id, para tener los datos del pais elegido
+        if(form.optionsSelected.findIndex((elem)=>elem.id===e.target.value)===-1) { // si no existe ya como pais seleccionado
+            setForm({
+                ...form,
+                optionsSelected:[...form.optionsSelected,dataCountries],
+                countries:[...form.countries,e.target.value] // guardamos el Id q esta en value de cada option
+            })   
+        }
+    }
+    const handlerRemoveCountry =(id)=>{
+        const newOptionsSelected=form.optionsSelected.filter((elem)=>elem.id!==id) // quitamos del array el que el userpresione la X(con el id)
         setForm({
             ...form,
-            optionsSelected:[...form.optionsSelected,dataCountries],
-            countries:[...form.countries,e.target.value] // guardamos el Id q esta en value de cada option
-        })       
+            optionsSelected:newOptionsSelected
+        })
     }
+
     return (
         <div className={s.container}>
             <h1>Tourist Activities</h1>
@@ -69,6 +78,7 @@ const Form = () => {
                 />
                 <label htmlFor='season'>Season: </label>
                 <select onChange={handlerInputsChange} name='season'>
+                    <option>Select season</option>
                     <option value='Winter'>Winter</option>
                     <option value='Summer'>Summer</option>
                     <option value='Autumn'>Autumn</option>
@@ -78,25 +88,35 @@ const Form = () => {
                 <select                   
                     onChange={handlerSelectChange}
                     name='countries'>
+                        <option>Select Countries</option>
                     {   //mapeamos el arreglo de paises para obtener el nombre en los select
                         countries.map((country) => <option key={country.id} value={country.id}>
                             {country.name}</option>
                         )
                     }
                 </select>
+                <div className={s.containerFlags}> 
+                    
+                    {   //muestra las banderas                    
+                        form.optionsSelected.length> 0 ? (//si tiene datos de un pais seleccionadop por el user
+                            form.optionsSelected.map((country)=>(
+                                <div className={s.flags} key={country.id}>
+                                    <img 
+                                        src={country.imageFlag}
+                                        alt=''                                
+                                    />
+                                    <button 
+                                        onClick={()=>handlerRemoveCountry(country.id)}
+                                        className={s.buttonX}
+                                    >X</button>                       
+                                </div>
+                            )) 
+                        ) :<p>Please, you must select at least one country</p>
+                    } 
+                </div>
                 <button type='submit'>Create Activity</button>
             </form>
-            <div>
-                {   //muestra las banderas
-                    form.optionsSelected.length> 0 && //si tiene datos
-                    form.optionsSelected.map((country)=> <img 
-                        src={country.imageFlag}
-                        alt=''
-                        key={country.id}
-                    />)                
-                }               
-            </div>
-
+        
         </div>
     );
 }

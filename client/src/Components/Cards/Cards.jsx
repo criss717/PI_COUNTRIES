@@ -22,14 +22,14 @@ const Cards = () => {
     //Handlers
     const handlerBack =()=>{
         setCurrentPage({
-            initialIndex:currentPage.initialIndex - 1,
-            finalIndex:currentPage.finalIndex - 1
+            initialIndex:currentPage.initialIndex - 10,
+            finalIndex:currentPage.finalIndex - 10
         })
     }
     const handlerNext =()=>{
         setCurrentPage({
-            initialIndex:currentPage.initialIndex + 1,
-            finalIndex:currentPage.finalIndex + 1
+            initialIndex:currentPage.initialIndex + 10,
+            finalIndex:currentPage.finalIndex + 10
         })
     }
 
