@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Card from '../Card/Card'
 import s from './Cards.module.css'
-import {useSelector } from 'react-redux'
+import {useSelector,useDispatch } from 'react-redux'
+import { getAll } from "../../Redux/actions/actions";
 
 const Cards = () => {
     //Hooks
-    const data = useSelector(state=>state.allCountries) // accedemos a la variable global
-  
+    const data = useSelector(state=>state.allCountries) // accedemos a la variable global    
+    const dispatch = useDispatch() // para ejecutar la acción mostar países,    
+    useEffect(()=>{        
+        dispatch(getAll())
+    },[]) 
+
     //Funcionalidades
     const cardsForPage=10 // para renderizar solo 10 tarjetas de paises por pag.
     const [currentPage,setCurrentPage]=useState({
@@ -37,13 +42,13 @@ const Cards = () => {
         <div className={s.container}>
             <div className={s.cards}>
                 {   
-                    countries && countries.map((country) => // mapeamos el arreglo con slice
+                    countries.length>0 ? (countries.map((country) => // mapeamos el arreglo con slice
                         <Card name={country.name} // a cada tarjeta le damos las propsenviamos por props los datos del arreglo data
                         continents={country.continents} 
                         imageFlag={country.imageFlag} 
                         id={country.id}
                         key={country.id}          
-                    />)
+                    />)) : <p>Loading...</p>
                 }                
             </div>
             <div className={s.buttons}>

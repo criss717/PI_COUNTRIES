@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanDetail, getDetail } from '../../Redux/actions/actions';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import s from '../Detail/Detail.module.css'
+import Form from '../Form/Form';
 
 
 const Detail = () => {
@@ -10,7 +11,8 @@ const Detail = () => {
     const countryDetail = useSelector((state)=>state.countryDetail) //variable global
     const dispatch= useDispatch() // para accionar el getdetail, y el cleanDetail
     const {id:idDetail}=useParams() // traemos el id q nos viene por params en la URL
-       
+    const navigate= useNavigate();
+     
     useEffect(()=>{
         dispatch(getDetail(idDetail)) //will did montain
         return ()=>{
@@ -18,8 +20,15 @@ const Detail = () => {
         }        
     },[idDetail])
 
+    const handlerclick = ()=>{       
+        navigate(`/activities?id=${idDetail}`)        
+    }
+
     return ( 
         <div className={s.container}>
+            <Link to='/home'>
+                <button>Atras</button>
+            </Link>
             <div className={s.target}>
                 <h2>{countryDetail.id}</h2>
                 <h1>{countryDetail.name}</h1>
@@ -42,17 +51,12 @@ const Detail = () => {
                         </>
                     ):( // si no existen actividades
                         <>
-                            <h2>There are not tourist activities:</h2>
-                            <Link to='/activities'>
-                                <button>Create Activity</button>
-                            </Link>
+                            <h2>There are not tourist activities:</h2>                            
+                            <button onClick={()=>handlerclick()}>Create Activity</button>                    
                         </>
                     )
-
-                }
-                
-            </div>
-            
+                }                
+            </div>            
         </div>
     );
 }

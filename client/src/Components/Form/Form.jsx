@@ -3,23 +3,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postActivity, getActivities } from '../../Redux/actions/actions'
 import s from '../Form/Form.module.css'
 import validation from './validation'
+import { useLocation } from 'react-router-dom'
 
 const Form = () => {
+    //hooks
+    const countries = useSelector(state => state.allCountries) // accedemos a la variable global 
+    const dispatch = useDispatch()    
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc¿
+    const idDetail = queryParams.get('id');
+
     //estados
     const [form, setForm] = useState({
         name: "",
         difficulty: "",
         duration: "",
         season: "",
-        countries: [], // para la tabla intermedia, debe contener los id de los paises escogidos        
-        optionsSelected:[] // para mostar las imagenes de las banderas
+        countries: idDetail ? [idDetail] : [] , // para la tabla intermedia, debe contener los id de los paises escogidos        
+        optionsSelected:idDetail ? [countries.find((country)=>country.id===idDetail)] : [] // para mostar las imagenes de las banderas
     })
     const [errors,setErrrors]= useState({}) // manejo de errores
     const [selectedCountry, setSelectedCountry] = useState('');
 
-    //hooks
-    const countries = useSelector(state => state.allCountries) // accedemos a la variable global 
-    const dispatch = useDispatch()
 
     useEffect(()=>{
         setErrrors(validation({...form})) // me sirve para actualizar los errores en la parte de validation, para enviar un [] cuando eliminemos todas las banderas y tmbn deshabilito el boton apenas se monta el componente
