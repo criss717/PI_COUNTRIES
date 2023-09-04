@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 const Form = () => {
     //hooks
-    const countries = useSelector(state => state.allCountries) // accedemos a la variable global 
+    const countries = useSelector(state => state.copyCountries) // accedemos a la variable global 
     const dispatch = useDispatch()    
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc¿

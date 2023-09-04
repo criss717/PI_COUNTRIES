@@ -2,12 +2,13 @@ import React, { useState,useEffect } from "react";
 import Card from '../Card/Card'
 import s from './Cards.module.css'
 import {useSelector,useDispatch } from 'react-redux'
-import { getAll } from "../../Redux/actions/actions";
+import { filterCountries, getAll } from "../../Redux/actions/actions";
 
 const Cards = () => {
     //Hooks
-    const data = useSelector(state=>state.allCountries) // accedemos a la variable global    
-    const dispatch = useDispatch() // para ejecutar la acción mostar países,    
+    const allCountries = useSelector(state=>state.allCountries) // accedemos a la variable global de todos los paises
+    const allActivities = useSelector(state=>state.activities)   
+    const dispatch = useDispatch() // para ejecutar las acciones fetAll, filter y order,    
     useEffect(()=>{        
         dispatch(getAll())
     },[]) 
@@ -18,15 +19,15 @@ const Cards = () => {
         initialIndex:0,
         finalIndex:cardsForPage
     })
-    const currentCards=data.slice(currentPage.initialIndex,currentPage.finalIndex) // tendremos un slice del array original q llega por props
+    const currentCards=allCountries.slice(currentPage.initialIndex,currentPage.finalIndex) // tendremos un slice del array original q llega por props
     
-    const countries = data.length>10 ?  // por si la info nos llega con menos de diez paises
+    const countries = allCountries.length>10 ?  // por si la info nos llega con menos de diez paises
         currentCards :
-        data
+        allCountries
     
     //Handlers
     const handlerBack =()=>{
-        setCurrentPage({
+        setCurrentPage({ 
             initialIndex:currentPage.initialIndex - 10,
             finalIndex:currentPage.finalIndex - 10
         })
@@ -37,13 +38,40 @@ const Cards = () => {
             finalIndex:currentPage.finalIndex + 10
         })
     }
+    const handlerSelectContinents =(e)=>{
+        const attribute = e.target.name;
+        const value = e.target.value        
+        dispatch(filterCountries(attribute,value))
+        if(!value) dispatch(getAll()) // si ponemos all
+    }
 
     return ( 
         <div className={s.container}>
+            <div>
+                <label htmlFor="continents">Order by Continents</label>
+                <select name='continents' onChange={handlerSelectContinents}>
+                    <option value=''>All</option>
+                    <option value='Africa'>Africa</option>
+                    <option value='Asia'>Asia</option>
+                    <option value='Antarctica'>Antartica</option>
+                    <option value='Europe'>Europe</option>
+                    <option value='Oceania'>Oceania</option>                    
+                    <option value='North America'>North America</option>
+                    <option value='South America'>South America</option>
+                </select>
+                <label htmlFor="name">Order by Activity</label>
+                <select name='Activities' onChange={handlerSelectContinents}>
+                    <option value=''>All</option>
+                    {
+                        allActivities.length >0 &&  allActivities.map((elem) => <option key={elem.id} value={elem.name}>
+                        {elem.name}</option>)
+                    }                        
+                </select>
+            </div>
             <div className={s.cards}>
                 {   
                     countries.length>0 ? (countries.map((country) => // mapeamos el arreglo con slice
-                        <Card name={country.name} // a cada tarjeta le damos las propsenviamos por props los datos del arreglo data
+                        <Card name={country.name} // a cada tarjeta le  enviamos por props los datos del arreglo data
                         continents={country.continents} 
                         imageFlag={country.imageFlag} 
                         id={country.id}
@@ -53,7 +81,7 @@ const Cards = () => {
             </div>
             <div className={s.buttons}>
                 <button onClick={handlerBack} disabled={currentPage.initialIndex === 0}>Back</button>
-                <button onClick={handlerNext} disabled={currentPage.finalIndex >= data.length}>Next</button>
+                <button onClick={handlerNext} disabled={currentPage.finalIndex >= allCountries.length}>Next</button>
             </div>
         </div>
      );

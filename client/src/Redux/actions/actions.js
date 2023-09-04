@@ -76,3 +76,17 @@ export const getActivities = ()=>{
         alert(error.message)
     }
 }
+
+export const filterCountries=(attribute,value)=>{   
+    return ({
+        type:FILTER,
+        payload:{attribute,value}        
+    })    
+}
+
+export const orderCountries=(typeOrder)=>{   
+    return dispatch({
+        type:ORDER,
+        payload:typeOrder       
+    })    
+}
