@@ -1,4 +1,4 @@
-import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER,ORDER, POST_ACTIVITY, GET_ACTIVITIES } from "./types"
+import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER_COUNTRIES,FILTER_ACTIVITIES,ORDER, POST_ACTIVITY, GET_ACTIVITIES } from "./types"
 import axios from "axios"
 
 export const getAll= ()=>{
@@ -79,8 +79,15 @@ export const getActivities = ()=>{
 
 export const filterCountries=(attribute,value)=>{   
     return ({
-        type:FILTER,
+        type:FILTER_COUNTRIES,
         payload:{attribute,value}        
+    })    
+}
+
+export const filterActivities=(value)=>{   
+    return ({
+        type:FILTER_ACTIVITIES,
+        payload:value       
     })    
 }
 

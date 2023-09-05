@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import Card from '../Card/Card'
 import s from './Cards.module.css'
 import {useSelector,useDispatch } from 'react-redux'
-import { filterCountries, getAll } from "../../Redux/actions/actions";
+import { filterActivities, filterCountries, getActivities, getAll } from "../../Redux/actions/actions";
 
 const Cards = () => {
     //Hooks
@@ -11,6 +11,7 @@ const Cards = () => {
     const dispatch = useDispatch() // para ejecutar las acciones fetAll, filter y order,    
     useEffect(()=>{        
         dispatch(getAll())
+        dispatch(getActivities())
     },[]) 
 
     //Funcionalidades
@@ -41,8 +42,13 @@ const Cards = () => {
     const handlerSelectContinents =(e)=>{
         const attribute = e.target.name;
         const value = e.target.value        
-        dispatch(filterCountries(attribute,value))
         if(!value) dispatch(getAll()) // si ponemos all
+        else dispatch(filterCountries(attribute,value))
+    }
+    const handlerSelectActivities =(e)=>{      
+        const value = e.target.value        
+        if(!value) dispatch(getAll()) // si ponemos all
+        else dispatch(filterActivities(value))
     }
 
     return ( 
@@ -59,8 +65,8 @@ const Cards = () => {
                     <option value='North America'>North America</option>
                     <option value='South America'>South America</option>
                 </select>
-                <label htmlFor="name">Order by Activity</label>
-                <select name='Activities' onChange={handlerSelectContinents}>
+                <label htmlFor="Activities">Order by Activity</label>
+                <select name='Activities' onChange={handlerSelectActivities}>
                     <option value=''>All</option>
                     {
                         allActivities.length >0 &&  allActivities.map((elem) => <option key={elem.id} value={elem.name}>
