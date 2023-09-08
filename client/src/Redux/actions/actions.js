@@ -2,44 +2,47 @@ import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER_COUNTRIES
 import axios from "axios"
 
 export const getAll= ()=>{
-    try {
-        return async(dispatch) => {
+    return async(dispatch) => {
+        try {
             const {data} = await axios("http://localhost:3001/countries")
             return dispatch({
                 type:GET_ALL_COUNTRIES,
                 payload:data,
             })
         }        
-    } catch (error) {
-        alert(error.message)
+        catch (error) {
+            alert(error.message)
+        }
     }
 }
 
 export const getCountry = (name) =>{
-    try {
-        return async(dispatch) => {
+    return async(dispatch) => {
+        try {
             const {data} = await axios(`http://localhost:3001/countries?name=${name}`)
             return dispatch({
                 type:GET_COUNTRY,
                 payload:data
             })
         }        
-    } catch (error) {
-        alert(error.message)
+        catch (error) {
+            alert(error.message)
+        }
     }
 }
 
 export const getDetail = (id) =>{
-    try {
-        return async(dispatch) => {            
+    return async(dispatch) => {            
+        try {
             const {data} = await axios(`http://localhost:3001/countries/${id}`)            
             return dispatch({
                 type:GET_DETAIL,
                 payload:data
             })
         }        
-    } catch (error) {
-        alert(error.message)
+        catch (error) {
+            alert(error.message)
+        }
     }
 }
 
@@ -50,30 +53,36 @@ export const cleanDetail = ()=>{
 }
 
 export const postActivity =(activity)=>{
-    try {
-        return async (dispatch) =>{
-             const {data} = await axios.post('http://localhost:3001/activities',activity )            
-             return dispatch({
-                type:POST_ACTIVITY,  
-                payload:data              
-             })
+    return async (dispatch) =>{
+        try {
+            const {data} = await axios.post('http://localhost:3001/activities',activity )            
+            return dispatch({
+            type:POST_ACTIVITY,  
+            payload:data              
+            })
         }
-    } catch (error) {
-        alert(error.message)
+         catch (error) {
+            console.log(error);
+            return dispatch ({
+                type:POST_ACTIVITY,
+                payload:{error:error.response.data} // el errror q mandamos de la bd y server
+            })
+        }
     }
 }
 
 export const getActivities = ()=>{
-    try {
-        return async (dispatch) =>{
-             const {data}= await axios('http://localhost:3001/activities')             
-             return dispatch({
+    return async (dispatch) =>{
+        try {
+            const {data}= await axios('http://localhost:3001/activities')             
+            return dispatch({
                 type:GET_ACTIVITIES, 
                 payload:data           
-             })
+            })
         }
-    } catch (error) {
-        console.log(error);       
+        catch (error) {
+            console.log(error);       
+        }
     }
 }
 

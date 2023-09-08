@@ -9,9 +9,9 @@ const Cards = () => {
     const allCountries = useSelector(state=>state.allCountries) // accedemos a la variable global de todos los paises
     const allActivities = useSelector(state=>state.activities)   
     const dispatch = useDispatch() // para ejecutar las acciones getAll, filter y order,    
-    useEffect(()=>{        
-        dispatch(getAll())
-        dispatch(getActivities())
+    useEffect(()=>{ 
+        if (allActivities.length === 0) dispatch(getActivities());          
+        dispatch(getAll())        
     },[]) 
 
     //Funcionalidades
@@ -65,8 +65,15 @@ const Cards = () => {
                 <select name='Activities' onChange={handlerSelect}>
                     <option value=''>All</option>
                     {
-                        allActivities.length >0 &&  allActivities.map((elem) => <option key={elem.id} value={elem.name}>
-                        {elem.name}</option>)
+                         allActivities.length > 0 ? allActivities.map((elem) => (
+                            <option key={elem.id} value={elem.name}>
+                                {elem.name}
+                            </option>
+                        )) : (
+                            <option value='' disabled>
+                                No hay actividades disponibles
+                            </option>
+                        )
                     }                        
                 </select>                
             </div>

@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postActivity, getActivities, getAll } from '../../Redux/actions/actions'
 import s from '../Form/Form.module.css'
 import validation from './validation'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import CustomCard from '../CustomCard/CustomCard'
 
 const Form = () => {
     //hooks
     const countries = useSelector(state => state.copyCountries) // accedemos a la variable global, a la copia q esta sin modificar
+    countries.sort((a,b)=>a.name.charCodeAt()- b.name.charCodeAt()) // ordenamos de forma alfabetica
     const dispatch = useDispatch()    
     const location = useLocation();
-    const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc¿
+    const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc
     const idDetail = queryParams.get('id');
 
     //estados
@@ -24,27 +26,35 @@ const Form = () => {
     })
     const [errors,setErrrors]= useState({}) // manejo de errores
     const [selectedCountry, setSelectedCountry] = useState(''); // nos sirve para reiniciar el select cada q elegimos un pais
-
-
+    const [showCustomCard, setShowCustomCard]=useState({// para mostrar la tarjeta personalizada
+        text:'',
+        color:''
+    }) 
+    
     useEffect(()=>{        
         setErrrors(validation({...form})) // me sirve para actualizar los errores en la parte de validation, para enviar un [] cuando eliminemos todas las banderas y tmbn deshabilito el boton apenas se monta el componente
         setSelectedCountry('') // para volver a "selected country" en mi select de html
     },[form])
-
+    
     //handlers
     const onSubmit = async (e) => { //enviaremos por body a la URL del back
-        e.preventDefault();
-        await dispatch(postActivity(form)) 
-        dispatch(getActivities()) // hasta q no se completa el post no obtengo
-        e.target.reset()// limpia el form cuando enviemos la info    
-        setForm({  // limpiamos el estado
-            name: "",
-            difficulty: "",
-            duration: "",
-            season: "",
-            countries: [],      
-            optionsSelected:[] 
-        })  
+        e.preventDefault();        
+        const activity=await dispatch(postActivity(form)) 
+        dispatch(getActivities()) // hasta q no se completa el post no obtengo           
+        if(!activity.payload.error) { // si no nos llega error            
+            setShowCustomCard({
+                ...showCustomCard,
+                text:`The tourist activity whit name ${form.name} was created successfully`,
+                color:'green'
+            })
+        }else {
+            setShowCustomCard({
+                ...showCustomCard,
+                text:activity.payload.error,
+                color:'red'
+            })
+        }                      
+        e.target.reset()// limpia el form cuando enviemos la info 
     }
     const handlerInputsChange = (e) => {     //manejador de inputs
         const property = e.target.name;
@@ -80,9 +90,23 @@ const Form = () => {
             countries:countriesResult
         })        
     }
+    const handlerCloseCard =()=>{
+        setShowCustomCard(false)
+        setForm({  // limpiamos el estado
+            name: "",
+            difficulty: "",
+            duration: "",
+            season: "",
+            countries: [],      
+            optionsSelected:[] 
+        })
+    }
 
     return (
         <div className={s.container}>
+            <Link to='/home'>
+                <button>Atras</button>
+            </Link>
             <h1>Tourist Activities</h1>
             <form onSubmit={onSubmit}>
                 <label htmlFor='name'>Name of the tourist activity: </label>
@@ -155,7 +179,10 @@ const Form = () => {
                 </div>
                 <button type='submit' disabled={Object.keys(errors).length>0}>Create Activity</button>
             </form>
-        
+            {
+               showCustomCard.text && <CustomCard text={showCustomCard.text} onClose={handlerCloseCard} color={showCustomCard.color}/>
+            } 
+            
         </div>
     );
 }

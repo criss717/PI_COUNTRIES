@@ -1,0 +1,36 @@
+.customCardGreen, .customCardRed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);    
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;    
+}
+
+.customCardGreen{
+    background-color: #58a7d1;
+}
+
+.customCardRed{
+    background-color: #b63a35;
+}
+
+
+  
+.cardContent {
+    text-align: center;
+}
+  
+.cardContent button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+  

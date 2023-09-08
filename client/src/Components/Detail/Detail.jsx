@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanDetail, getDetail } from '../../Redux/actions/actions';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -11,7 +11,10 @@ const Detail = () => {
     const dispatch= useDispatch() // para accionar el getdetail, y el cleanDetail
     const {id:idDetail}=useParams() // traemos el id q nos viene por params en la URL
     const navigate= useNavigate();
-     
+    
+    const latitude=Number(countryDetail.latitude) // latitud para mostar el mapa
+    const longitude=Number(countryDetail.longitude) // longitud para mostar el mapa
+         
     useEffect(()=>{
         dispatch(getDetail(idDetail)) //will did montain
         return ()=>{
@@ -22,7 +25,6 @@ const Detail = () => {
     const handlerclick = ()=>{       
         navigate(`/activities?id=${idDetail}`)        
     }
-
     return ( 
         <div className={s.container}>
             <Link to='/home'>
@@ -57,8 +59,11 @@ const Detail = () => {
                 }                
             </div>  
             <div>
-                <p>{countryDetail.maps}</p>               
-                <Maps lat={4.0} lon={-72.0}/>              
+                {
+                    latitude && longitude && <Maps lat={latitude} lon={longitude} area={countryDetail.area}/> 
+                }             
+                <a href={countryDetail.maps}>See the larger map</a>  
+                             
             </div>       
         </div>
     );

@@ -36,8 +36,13 @@ module.exports = (sequelize) => {
     },
     maps:{
       type: DataTypes.STRING,      
+    },
+    latitude:{
+      type: DataTypes.DECIMAL
+    },
+    longitude:{
+      type: DataTypes.DECIMAL
     }
-
   }, {
     timestamps:false //retira los createdAt y updateAt automáticos
  });
