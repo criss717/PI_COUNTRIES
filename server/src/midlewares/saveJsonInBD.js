@@ -13,6 +13,7 @@ module.exports=  async (model)=>{ // llenamos los datos en la base de datos
                     subRegion:elem.subregion,
                     area:elem.area,
                     population:elem.population,
+                    maps:elem.maps.googleMaps
                 })            
             } catch (error) {
                 console.log(error);

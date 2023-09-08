@@ -2,13 +2,13 @@ import React, { useState,useEffect } from "react";
 import Card from '../Card/Card'
 import s from './Cards.module.css'
 import {useSelector,useDispatch } from 'react-redux'
-import { filterActivities, filterCountries, getActivities, getAll } from "../../Redux/actions/actions";
+import { filterActivities, filterCountries, getActivities, getAll, orderCountries } from "../../Redux/actions/actions";
 
 const Cards = () => {
     //Hooks
     const allCountries = useSelector(state=>state.allCountries) // accedemos a la variable global de todos los paises
     const allActivities = useSelector(state=>state.activities)   
-    const dispatch = useDispatch() // para ejecutar las acciones fetAll, filter y order,    
+    const dispatch = useDispatch() // para ejecutar las acciones getAll, filter y order,    
     useEffect(()=>{        
         dispatch(getAll())
         dispatch(getActivities())
@@ -39,23 +39,19 @@ const Cards = () => {
             finalIndex:currentPage.finalIndex + 10
         })
     }
-    const handlerSelectContinents =(e)=>{
+    const handlerSelect=(e)=>{
         const attribute = e.target.name;
-        const value = e.target.value        
-        if(!value) dispatch(getAll()) // si ponemos all
-        else dispatch(filterCountries(attribute,value))
-    }
-    const handlerSelectActivities =(e)=>{      
-        const value = e.target.value        
-        if(!value) dispatch(getAll()) // si ponemos all
-        else dispatch(filterActivities(value))
-    }
+        const value = e.target.value 
+        if(attribute === 'continents') dispatch(filterCountries(attribute,value))
+        if(attribute === 'Activities') dispatch(filterActivities(value))
+        if(attribute === 'order' || attribute === 'orderByPopulation') dispatch(orderCountries(value))
+    }   
 
     return ( 
         <div className={s.container}>
             <div>
-                <label htmlFor="continents">Order by Continents</label>
-                <select name='continents' onChange={handlerSelectContinents}>
+                <label htmlFor="continents">Filter by Continents</label>
+                <select name='continents' onChange={handlerSelect}>
                     <option value=''>All</option>
                     <option value='Africa'>Africa</option>
                     <option value='Asia'>Asia</option>
@@ -65,13 +61,27 @@ const Cards = () => {
                     <option value='North America'>North America</option>
                     <option value='South America'>South America</option>
                 </select>
-                <label htmlFor="Activities">Order by Activity</label>
-                <select name='Activities' onChange={handlerSelectActivities}>
+                <label htmlFor="Activities">Filter by Activity</label>
+                <select name='Activities' onChange={handlerSelect}>
                     <option value=''>All</option>
                     {
                         allActivities.length >0 &&  allActivities.map((elem) => <option key={elem.id} value={elem.name}>
                         {elem.name}</option>)
                     }                        
+                </select>                
+            </div>
+            <div>
+                <label htmlFor="order">Order A-Z</label>
+                <select name='order' onChange={handlerSelect}>
+                    <option value=''>Select Order</option>
+                    <option value='A-Z'>A-Z</option>
+                    <option value='Z-A'>Z-A</option>                    
+                </select>
+                <label htmlFor="orderByPopulation">Order by Poulation</label>
+                <select name='orderByPopulation' onChange={handlerSelect}>
+                    <option value=''>Select Order</option>
+                    <option value='largestPopulationFirst'>largest Population First</option>
+                    <option value='SmallestPopulationFirst'>Smallest Population First</option>                    
                 </select>
             </div>
             <div className={s.cards}>

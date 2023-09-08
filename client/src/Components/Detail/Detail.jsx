@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cleanDetail, getDetail } from '../../Redux/actions/actions';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import s from '../Detail/Detail.module.css'
-import Form from '../Form/Form';
-
+import Maps from '../Maps/Maps';
 
 const Detail = () => {
     //hooks
@@ -56,7 +55,11 @@ const Detail = () => {
                         </>
                     )
                 }                
-            </div>            
+            </div>  
+            <div>
+                <p>{countryDetail.maps}</p>               
+                <Maps lat={4.0} lon={-72.0}/>              
+            </div>       
         </div>
     );
 }

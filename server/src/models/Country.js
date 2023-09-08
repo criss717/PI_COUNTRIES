@@ -34,6 +34,9 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    maps:{
+      type: DataTypes.STRING,      
+    }
 
   }, {
     timestamps:false //retira los createdAt y updateAt automáticos

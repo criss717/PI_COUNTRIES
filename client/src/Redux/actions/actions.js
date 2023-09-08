@@ -73,7 +73,7 @@ export const getActivities = ()=>{
              })
         }
     } catch (error) {
-        alert(error.message)
+        console.log(error);       
     }
 }
 
@@ -92,8 +92,9 @@ export const filterActivities=(value)=>{
 }
 
 export const orderCountries=(typeOrder)=>{   
-    return dispatch({
+    return ({
         type:ORDER,
         payload:typeOrder       
     })    
 }
+

@@ -39,3 +39,9 @@
 .read-the-docs {
   color: #888;
 }
+
+/* para el map */
+.leaflet-container {  
+  width: 50%;
+  height: 50vh;
+}

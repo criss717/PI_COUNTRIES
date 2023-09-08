@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { postActivity, getActivities } from '../../Redux/actions/actions'
+import { postActivity, getActivities, getAll } from '../../Redux/actions/actions'
 import s from '../Form/Form.module.css'
 import validation from './validation'
 import { useLocation } from 'react-router-dom'
 
 const Form = () => {
     //hooks
-    const countries = useSelector(state => state.copyCountries) // accedemos a la variable global 
+    const countries = useSelector(state => state.copyCountries) // accedemos a la variable global, a la copia q esta sin modificar
     const dispatch = useDispatch()    
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc¿
@@ -23,10 +23,10 @@ const Form = () => {
         optionsSelected:idDetail ? [countries.find((country)=>country.id===idDetail)] : [] // para mostar las imagenes de las banderas
     })
     const [errors,setErrrors]= useState({}) // manejo de errores
-    const [selectedCountry, setSelectedCountry] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState(''); // nos sirve para reiniciar el select cada q elegimos un pais
 
 
-    useEffect(()=>{
+    useEffect(()=>{        
         setErrrors(validation({...form})) // me sirve para actualizar los errores en la parte de validation, para enviar un [] cuando eliminemos todas las banderas y tmbn deshabilito el boton apenas se monta el componente
         setSelectedCountry('') // para volver a "selected country" en mi select de html
     },[form])
