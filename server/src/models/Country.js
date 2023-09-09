@@ -42,6 +42,9 @@ module.exports = (sequelize) => {
     },
     longitude:{
       type: DataTypes.DECIMAL
+    },
+    coatOfArms:{
+      type:DataTypes.STRING
     }
   }, {
     timestamps:false //retira los createdAt y updateAt automáticos

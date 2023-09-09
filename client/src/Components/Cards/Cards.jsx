@@ -99,7 +99,7 @@ const Cards = () => {
                         imageFlag={country.imageFlag} 
                         id={country.id}
                         key={country.id}          
-                    />)) : <p>Loading...</p>
+                    />)) : <div className={s.loading}></div>
                 }                
             </div>
             <div className={s.buttons}>

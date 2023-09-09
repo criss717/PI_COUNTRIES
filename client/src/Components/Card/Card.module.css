@@ -3,10 +3,13 @@
     flex-direction: column;
     align-items: center;
     padding: 15px;
+    position: relative;   
 }
 
 .container img {
     height: auto;
     width: 100%;  
-    aspect-ratio: 1.5/1; /*sirve para la relacion ancho alto*/   
+    aspect-ratio: 1.5/1; /*sirve para la relacion ancho alto*/  
+    object-fit: cover; 
 }
+

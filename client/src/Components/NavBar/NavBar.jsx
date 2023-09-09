@@ -5,8 +5,11 @@ const NavBar = () => {
     return (
         <div>
             <SearchBar/>
-            <Link to='/activities'>
+            <Link to='/createActivities'>
                 <div>Create Activities</div>
+            </Link>
+            <Link to='/activities'>
+                <div>View Activities</div>
             </Link>
         </div>
     );

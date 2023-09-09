@@ -17,3 +17,8 @@
     align-items: center;
     margin-top: 2%;
 }
+
+.loading{
+    background-image: url('../../assets/Rotating-globe.gif');
+    width:100px ;
+}

@@ -7,8 +7,8 @@ const Card = ({imageFlag,name,continents,id}) => {
     return (         
         <div className={s.container}>
             <Link to={`/detail/${id}`}>
-                <img src={imageFlag} alt=''></img>
-            </Link>
+                <img  src={imageFlag} alt=''></img>
+            </Link>            
             <div>{name}</div>
             <div>{continents}</div>
         </div>

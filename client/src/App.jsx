@@ -6,6 +6,7 @@ import Cards from './Components/Cards/Cards'
 import Detail from './Components/Detail/Detail'
 import Form from './Components/Form/Form'
 import NavBar from './Components/NavBar/NavBar'
+import Activities from './Components/Activities/Activities'
 
 function App() {  
   //hooks
@@ -20,7 +21,8 @@ function App() {
         <Route path='/' element={<LandingPage/>}/>        
         <Route path='/home' element={<Cards/>}/>
         <Route path='/detail/:id' element={<Detail/>}/>        
-        <Route path='/activities' element={<Form/>}/>
+        <Route path='/createActivities' element={<Form/>}/>
+        <Route path='/activities' element={<Activities/>}/>
       </Routes>
     </>
   )

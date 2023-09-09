@@ -15,7 +15,8 @@ module.exports=  async (model)=>{ // llenamos los datos en la base de datos
                     population:elem.population,
                     maps:elem.maps.googleMaps,
                     latitude:elem.latlng[0],
-                    longitude:elem.latlng[1]
+                    longitude:elem.latlng[1],
+                    coatOfArms:elem.coatOfArms.svg
                 })            
             } catch (error) {
                 console.log(error);
