@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
 import { getCountry } from '../../Redux/actions/actions';
+import s from '../SearchBar/SearchBar.module.css'
 
 const SearchBar = (props) => {
     
@@ -11,10 +12,11 @@ const SearchBar = (props) => {
     }    
 
     return ( 
-        <div>
+        <div className={s.containerSearch} >
             <input type='text'
                 placeholder='Flter By Name'
                 onChange={handleChange}
+                className={s.inputSearch}
             />           
         </div>
     );
