@@ -85,7 +85,7 @@ const Cards = () => {
                         <option value='A-Z'>A-Z</option>
                         <option value='Z-A'>Z-A</option>                    
                     </select>
-                    <label htmlFor="orderByPopulation">Order by Poulation</label>
+                    <label htmlFor="orderByPopulation">Order by Population</label>
                     <select name='orderByPopulation' onChange={handlerSelect}>
                         <option value=''>Select Order</option>
                         <option value='largestPopulationFirst'>largest Population First</option>

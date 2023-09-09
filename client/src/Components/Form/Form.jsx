@@ -103,7 +103,7 @@ const Form = () => {
     }
 
     return (
-        <div className={s.container}>
+        <div className={s.containerForm}>
             <Link to='/home'>
                 <button>Atras</button>
             </Link>

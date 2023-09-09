@@ -6,13 +6,19 @@
     align-items: center;  
     font-size: larger;  
     font-weight: bolder;
+    align-items: flex-start;
+    background-image: url('../../assets/QS2843.jpg');
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color:rgb(252, 255, 255);    
 }
 
 .cards {
     display: grid;    
     grid-template-columns: repeat(5, 1fr);  
     margin: 2%;  
-    height: -webkit-fill-available;    
+    height: -webkit-fill-available;         
 }
 
 .buttons{
@@ -34,21 +40,28 @@
 .filtersOrders, .filters, .order{
     display: flex;
     flex-direction: column;
+    align-items: center
 }
 
 .filtersOrders{
     background-color: rgb(43 71 161 / 77%);;
-    height: -webkit-fill-available;
-    width: fit-content;
+    height: -webkit-fill-available;    
     padding: 0.5vw;
+    border-top: solid 2px;
+    width: 30vh;
 }
 
 .filters, .order{
     margin-top: 5vh;
-    border-top: solid 2px;           
+    border-top: solid 2px;
+    width: -webkit-fill-available;           
 }
 
-.filters label, .order label, .filters select, .order select{
-    margin-bottom: 7%;
+.filters label, .order label{    
     margin-top: 7%;
 }
+
+.filters select, .order select{
+    margin-bottom: 7%;    
+}
+
