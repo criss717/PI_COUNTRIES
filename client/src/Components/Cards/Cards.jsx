@@ -49,48 +49,51 @@ const Cards = () => {
 
     return ( 
         <div className={s.container}>
-            <div>
-                <label htmlFor="continents">Filter by Continents</label>
-                <select name='continents' onChange={handlerSelect}>
-                    <option value=''>All</option>
-                    <option value='Africa'>Africa</option>
-                    <option value='Asia'>Asia</option>
-                    <option value='Antarctica'>Antartica</option>
-                    <option value='Europe'>Europe</option>
-                    <option value='Oceania'>Oceania</option>                    
-                    <option value='North America'>North America</option>
-                    <option value='South America'>South America</option>
-                </select>
-                <label htmlFor="Activities">Filter by Activity</label>
-                <select name='Activities' onChange={handlerSelect}>
-                    <option value=''>All</option>
-                    {
-                         allActivities.length > 0 ? allActivities.map((elem) => (
-                            <option key={elem.id} value={elem.name}>
-                                {elem.name}
-                            </option>
-                        )) : (
-                            <option value='' disabled>
-                                No hay actividades disponibles
-                            </option>
-                        )
-                    }                        
-                </select>                
-            </div>
-            <div>
-                <label htmlFor="order">Order A-Z</label>
-                <select name='order' onChange={handlerSelect}>
-                    <option value=''>Select Order</option>
-                    <option value='A-Z'>A-Z</option>
-                    <option value='Z-A'>Z-A</option>                    
-                </select>
-                <label htmlFor="orderByPopulation">Order by Poulation</label>
-                <select name='orderByPopulation' onChange={handlerSelect}>
-                    <option value=''>Select Order</option>
-                    <option value='largestPopulationFirst'>largest Population First</option>
-                    <option value='SmallestPopulationFirst'>Smallest Population First</option>                    
-                </select>
-            </div>
+            <div className={s.filtersOrders}>
+                <div className={s.filters}>
+                    <label htmlFor="continents">Filter by Continents</label>
+                    <select name='continents' onChange={handlerSelect}>
+                        <option value=''>All</option>
+                        <option value='Africa'>Africa</option>
+                        <option value='Asia'>Asia</option>
+                        <option value='Antarctica'>Antartica</option>
+                        <option value='Europe'>Europe</option>
+                        <option value='Oceania'>Oceania</option>                    
+                        <option value='North America'>North America</option>
+                        <option value='South America'>South America</option>
+                    </select>
+                    <label htmlFor="Activities">Filter by Activity</label>
+                    <select name='Activities' onChange={handlerSelect}>
+                        <option value=''>All</option>
+                        {
+                            allActivities.length > 0 ? allActivities.map((elem) => (
+                                <option key={elem.id} value={elem.name}>
+                                    {elem.name}
+                                </option>
+                            )) : (
+                                <option value='' disabled>
+                                    No hay actividades disponibles
+                                </option>
+                            )
+                        }                        
+                    </select>                
+                </div>
+                <div className={s.order}>
+                    <label htmlFor="order">Order A-Z</label>
+                    <select name='order' onChange={handlerSelect}>
+                        <option value=''>Select Order</option>
+                        <option value='A-Z'>A-Z</option>
+                        <option value='Z-A'>Z-A</option>                    
+                    </select>
+                    <label htmlFor="orderByPopulation">Order by Poulation</label>
+                    <select name='orderByPopulation' onChange={handlerSelect}>
+                        <option value=''>Select Order</option>
+                        <option value='largestPopulationFirst'>largest Population First</option>
+                        <option value='SmallestPopulationFirst'>Smallest Population First</option>                    
+                    </select>
+                </div>
+
+                </div>
             <div className={s.cards}>
                 {   
                     countries.length>0 ? (countries.map((country) => // mapeamos el arreglo con slice
@@ -101,10 +104,10 @@ const Cards = () => {
                         key={country.id}          
                     />)) : <div className={s.loading}></div>
                 }                
-            </div>
-            <div className={s.buttons}>
-                <button onClick={handlerBack} disabled={currentPage.initialIndex === 0}>Back</button>
-                <button onClick={handlerNext} disabled={currentPage.finalIndex >= allCountries.length}>Next</button>
+                <div className={s.buttons}>
+                    <button onClick={handlerBack} disabled={currentPage.initialIndex === 0}>Back</button>
+                    <button onClick={handlerNext} disabled={currentPage.finalIndex >= allCountries.length}>Next</button>
+                </div>
             </div>
         </div>
      );
