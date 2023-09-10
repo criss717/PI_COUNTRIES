@@ -45,7 +45,10 @@ const Cards = () => {
         if(attribute === 'continents') dispatch(filterCountries(attribute,value))
         if(attribute === 'Activities') dispatch(filterActivities(value))
         if(attribute === 'order' || attribute === 'orderByPopulation') dispatch(orderCountries(value))
-    }   
+    }  
+    const handlerClearFilters = ()=>{
+        dispatch(getAll())
+    }
 
     return ( 
         <div className={s.container}>
@@ -92,6 +95,7 @@ const Cards = () => {
                         <option value='SmallestPopulationFirst'>Smallest Population First</option>                    
                     </select>
                 </div>
+                <button className={s.buttonClear} onClick={handlerClearFilters}>Clear Filters</button>
 
                 </div>
             <div className={s.cards}>
@@ -103,11 +107,14 @@ const Cards = () => {
                         id={country.id}
                         key={country.id}          
                     />)) : <div className={s.loading}></div>
+                }
+                {
+                    countries.length>9 &&
+                    <div className={s.buttons}>
+                        <button onClick={handlerBack} disabled={currentPage.initialIndex === 0}>Back</button>
+                        <button onClick={handlerNext} disabled={currentPage.finalIndex >= allCountries.length}>Next</button>
+                    </div>
                 }                
-                <div className={s.buttons}>
-                    <button onClick={handlerBack} disabled={currentPage.initialIndex === 0}>Back</button>
-                    <button onClick={handlerNext} disabled={currentPage.finalIndex >= allCountries.length}>Next</button>
-                </div>
             </div>
         </div>
      );

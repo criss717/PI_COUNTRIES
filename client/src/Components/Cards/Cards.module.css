@@ -11,10 +11,11 @@
     background-size:cover;
     background-position: center;
     background-repeat: no-repeat;
-    color:rgb(252, 255, 255);    
+    color:rgb(252, 255, 255);  
+    position: absolute;  
 }
 
-.cards {
+.cards {    
     display: grid;    
     grid-template-columns: repeat(5, 1fr);  
     margin: 2%;  
@@ -34,9 +35,17 @@
 }
 .loading{
     background-image: url('../../assets/Rotating-globe.gif');
-    width:100px ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:contain;
+    width: 100px; 
+    height: 100px;
+    top: 10%;
+    left: 50%;
+    opacity: 0.9;
+    border-radius: 50%; 
+    position: absolute;   
 }
-
 .filtersOrders, .filters, .order{
     display: flex;
     flex-direction: column;
@@ -65,3 +74,6 @@
     margin-bottom: 7%;    
 }
 
+.buttonClear{
+    margin-top: 15%;
+}

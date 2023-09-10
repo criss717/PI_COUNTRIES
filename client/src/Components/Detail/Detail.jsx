@@ -6,8 +6,6 @@ import s from '../Detail/Detail.module.css'
 import Maps from '../Maps/Maps';
 import CardActivity from '../CardActivity/CardActivity';
 
-
-
 const Detail = () => {
     //hooks
     const countryDetail = useSelector((state)=>state.countryDetail) //variable global

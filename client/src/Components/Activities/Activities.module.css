@@ -1,0 +1,25 @@
+.containerActivities{
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../assets/102484-horizonte_de_la_ciudad_durante_la_noche-1920x1080.jpg');
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    position: relative;   
+}
+.headers{
+    display: flex;
+    align-items: center;
+    
+}
+.headers button{
+    position: absolute;
+    top:5%;
+    left: 7%;
+}
+.cardsActivities{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll; 
+    width: 90vw;     
+}

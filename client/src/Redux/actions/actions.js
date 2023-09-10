@@ -11,7 +11,7 @@ export const getAll= ()=>{
             })
         }        
         catch (error) {
-            alert(error.message)
+            console.log(error);
         }
     }
 }
@@ -26,7 +26,7 @@ export const getCountry = (name) =>{
             })
         }        
         catch (error) {
-            alert(error.message)
+            console.log(error);
         }
     }
 }
@@ -41,7 +41,7 @@ export const getDetail = (id) =>{
             })
         }        
         catch (error) {
-            alert(error.message)
+            console.log(error);
         }
     }
 }

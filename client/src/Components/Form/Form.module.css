@@ -1,17 +1,35 @@
-.containerForm, form{
-    width: 50vw;
+form{
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center; 
-    background-color: rgb(43 71 161 / 77%);  
+    background-color: rgba(6, 20, 46, 0.746);  
     font-size: larger;  
     font-weight: bolder; 
-    height: 80vh;
+    height: fit-content;
+    border-radius: 74px;
+    backdrop-filter: brightness(0.5);
+    padding: 0.5%;
+    margin: 0.5%;
+}
+form h1{
+    margin: 1%;
+}
+.containerForm{
+    color:rgb(252, 255, 255);  
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../assets/102484-horizonte_de_la_ciudad_durante_la_noche-1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    width: 100vw;
+    height: 100vh;    
 }
 
 .containerForm p{
     align-items: center;
-    color: rgb(173, 36, 36);
+    color: rgb(255, 13, 13);
     grid-column:center;
     margin: 1%;
     font-size: large;
@@ -28,11 +46,12 @@
     overflow: auto;
     padding: 1%;
     margin: 1%;
+    margin-bottom: 2%;   
 }
 
 .flags{
    position: relative; 
-   max-width: 300px;   
+   max-width: 200px;   
 }
 
 .flags img {    

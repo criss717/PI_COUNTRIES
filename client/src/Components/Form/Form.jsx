@@ -104,11 +104,11 @@ const Form = () => {
 
     return (
         <div className={s.containerForm}>
-            <Link to='/home'>
-                <button>Atras</button>
-            </Link>
-            <h1>Tourist Activities</h1>
             <form onSubmit={onSubmit}>
+                <Link to='/home'>
+                    <button>Atras</button>
+                </Link>
+                <h1>Tourist Activities</h1>
                 <label htmlFor='name'>Name of the tourist activity: </label>
                 <input
                     name='name'
