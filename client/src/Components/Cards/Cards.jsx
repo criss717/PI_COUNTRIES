@@ -26,7 +26,6 @@ const Cards = () => {
         currentCards :
         allCountries
     
-        console.log(countries);
     //Handlers
     const handlerBack =()=>{
         setCurrentPage({ 

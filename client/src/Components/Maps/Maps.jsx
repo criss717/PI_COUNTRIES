@@ -6,7 +6,7 @@ const Maps = ({ lat, lon, area }) => {
   const zoom= area<10000 ? 7 : 3.3 // para mostar de manera escalada el zoom dependiendo del área
 
   return (
-    <MapContainer center={position} zoom={zoom} style={{ width: '100%', height: '300px', borderRadius: '26px'}}>
+    <MapContainer center={position} zoom={zoom} style={{ width: '100%', height: '251px', borderRadius: '26px'}}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
