@@ -77,3 +77,14 @@
 .buttonClear{
     margin-top: 15%;
 }
+
+.divError{
+    position: absolute;
+    left: 43%;
+    top:30%;
+    background-color: rgba(161, 68, 68, 0.77);;
+    width: fit-content;
+    backdrop-filter: blur(10px);  
+    padding: 1%; 
+    border-radius: 30px;
+}

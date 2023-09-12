@@ -9,12 +9,7 @@ const Activities = () => {
     
     return (       
         <div className={s.containerActivities}>
-            <div className={s.headers}>
-                <Link to='/home'>
-                    <button>Atras</button>
-                </Link>
-                <h1>Tourist Activities</h1>
-            </div>
+            <h1>Tourist Activities</h1>           
             <div className={s.cardsActivities}>
                 {
                     activities.length>0 &&

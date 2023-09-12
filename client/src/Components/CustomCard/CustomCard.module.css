@@ -11,7 +11,8 @@
 }
 
 .customCardGreen{
-    background-color: #58a7d1;
+    background-color: #2bf062;
+    color: green;
 }
 
 .customCardRed{
@@ -22,6 +23,8 @@
   
 .cardContent {
     text-align: center;
+    color:aliceblue;
+    font-size: larger;
 }
   
 .cardContent button {

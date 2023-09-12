@@ -44,9 +44,10 @@ const Form = () => {
         if(!activity.payload.error) { // si no nos llega error            
             setShowCustomCard({
                 ...showCustomCard,
-                text:`The tourist activity whit name ${form.name} was created successfully`,
+                text:`The tourist activity whit name "${form.name}" was created successfully`,
                 color:'green'
             })
+            e.target.reset()// limpia el form cuando enviemos la info 
         }else {
             setShowCustomCard({
                 ...showCustomCard,
@@ -54,7 +55,6 @@ const Form = () => {
                 color:'red'
             })
         }                      
-        e.target.reset()// limpia el form cuando enviemos la info 
     }
     const handlerInputsChange = (e) => {     //manejador de inputs
         const property = e.target.name;
@@ -92,22 +92,21 @@ const Form = () => {
     }
     const handlerCloseCard =()=>{
         setShowCustomCard(false)
-        setForm({  // limpiamos el estado
-            name: "",
-            difficulty: "",
-            duration: "",
-            season: "",
-            countries: [],      
-            optionsSelected:[] 
-        })
+        if(showCustomCard.color==='green') {
+            setForm({  // limpiamos el estado
+                name: "",
+                difficulty: "",
+                duration: "",
+                season: "",
+                countries: [],      
+                optionsSelected:[] 
+            })
+        }
     }
 
     return (
         <div className={s.containerForm}>
-            <form onSubmit={onSubmit}>
-                <Link to='/home'>
-                    <button>Atras</button>
-                </Link>
+            <form onSubmit={onSubmit}>               
                 <h1>Tourist Activities</h1>
                 <label htmlFor='name'>Name of the tourist activity: </label>
                 <input
@@ -116,7 +115,7 @@ const Form = () => {
                     type='text'
                     onChange={handlerInputsChange}
                 />
-                <p>{errors.name}</p>
+                <p className={s.p}>{errors.name}</p>
                 <label htmlFor='difficulty'>Difficulty: </label>
                 <select name='difficulty' onChange={handlerInputsChange}>
                     <option value=''>Select Difficulty</option>
@@ -126,7 +125,7 @@ const Form = () => {
                     <option value='4'>4</option>
                     <option value='5'>5</option>
                 </select>
-                <p>{errors.difficulty}</p>
+                <p className={s.p}>{errors.difficulty}</p>
                 <label htmlFor='duration'>Duration in hours: </label>
                 <input
                     name='duration'
@@ -134,7 +133,7 @@ const Form = () => {
                     type='number'
                     onChange={handlerInputsChange}
                 />
-                <p>{errors.duration}</p>
+                <p className={s.p}>{errors.duration}</p>
                 <label htmlFor='season'>Season: </label>
                 <select onChange={handlerInputsChange} name='season'>
                     <option value=''>Select season</option>
@@ -143,7 +142,7 @@ const Form = () => {
                     <option value='Autumn'>Autumn</option>
                     <option value='Spring'>Spring</option>
                 </select>
-                <p>{errors.season}</p>
+                <p className={s.p}>{errors.season}</p>
                 <label htmlFor='countries'>Countries:</label>
                 <select
                     value={selectedCountry}                   
@@ -156,7 +155,7 @@ const Form = () => {
                         )
                     }
                 </select>
-                <p>{errors.countries}</p>               
+                <p className={s.p}> {errors.countries}</p>               
                 
                 <div className={s.containerFlags}> 
                     
@@ -174,7 +173,7 @@ const Form = () => {
                                     >X</button>                       
                                 </div>
                             )) 
-                        ) :<p>Please, you must select at least one country</p>
+                        ) :<p className={s.p}>Please, you must select at least one country</p>
                     } 
                 </div>
                 <button type='submit' disabled={Object.keys(errors).length>0}>Create Activity</button>

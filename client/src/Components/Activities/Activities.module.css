@@ -7,11 +7,6 @@
     align-items: center;
     position: relative;   
 }
-.headers{
-    display: flex;
-    align-items: center;
-    
-}
 .headers button{
     position: absolute;
     top:5%;

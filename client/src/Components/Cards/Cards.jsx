@@ -10,8 +10,8 @@ const Cards = () => {
     const allActivities = useSelector(state=>state.activities)   
     const dispatch = useDispatch() // para ejecutar las acciones getAll, filter y order,    
     useEffect(()=>{ 
-        if (allActivities.length === 0) dispatch(getActivities());          
-        dispatch(getAll())        
+        if (allActivities.length === 0) dispatch(getActivities());  
+        if(!allCountries.error) dispatch(getAll())        
     },[]) 
 
     //Funcionalidades
@@ -20,12 +20,13 @@ const Cards = () => {
         initialIndex:0,
         finalIndex:cardsForPage
     })
-    const currentCards=allCountries.slice(currentPage.initialIndex,currentPage.finalIndex) // tendremos un slice del array original q llega por props
+    const currentCards= !allCountries.error && allCountries.slice(currentPage.initialIndex,currentPage.finalIndex) // tendremos un slice del array original q llega por props
     
     const countries = allCountries.length>10 ?  // por si la info nos llega con menos de diez paises
         currentCards :
         allCountries
     
+        console.log(countries);
     //Handlers
     const handlerBack =()=>{
         setCurrentPage({ 
@@ -99,7 +100,7 @@ const Cards = () => {
 
                 </div>
             <div className={s.cards}>
-                {   
+                {   !countries.error &&
                     countries.length>0 ? (countries.map((country) => // mapeamos el arreglo con slice
                         <Card name={country.name} // a cada tarjeta le  enviamos por props los datos del arreglo data
                         continents={country.continents} 
@@ -107,6 +108,9 @@ const Cards = () => {
                         id={country.id}
                         key={country.id}          
                     />)) : <div className={s.loading}></div>
+                }
+                {
+                    countries.error && <div className={s.divError}>{countries.error}</div>
                 }
                 {
                     countries.length>9 &&

@@ -26,8 +26,11 @@ export const getCountry = (name) =>{
             })
         }        
         catch (error) {
-            console.log(error);
-        }
+            return dispatch({
+                type:GET_COUNTRY,
+                payload:{error:error.response.data} // el errror q mandamos de la bd y server
+            })
+        }            
     }
 }
 

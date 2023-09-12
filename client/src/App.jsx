@@ -15,7 +15,7 @@ function App() {
   return (
     <> 
       {
-        location.pathname.includes('/home') && <NavBar/>
+        location.pathname!==('/') && <NavBar/>
       }        
       <Routes>
         <Route path='/' element={<LandingPage/>}/>        
