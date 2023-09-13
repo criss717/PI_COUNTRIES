@@ -1,8 +1,7 @@
 .cardActivity {    
     display: flex;
     flex-direction: column;   
-    width: fit-content; /* Ajusta el ancho según el contenido */
-    height: fit-content; /* Ajusta la altura según el contenido */   
+    width: 20vw;  
     border:3px aquamarine solid;    
     border-radius: 30px;
     transform: skew(-3deg,-1deg);

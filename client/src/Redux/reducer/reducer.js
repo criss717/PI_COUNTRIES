@@ -50,20 +50,26 @@ export const rootReducer = (state=initialState,action)=>{
             const copyCountries=[...state.copyCountries] 
             state.allCountries=copyCountries // reiniciamos el allCountries cada vez q ejecutamos la action           
             const {attribute,value}= action.payload // el atributo por el cual vamos a filtrar                                  
-            if(value===''){
+            if(value===''){ //todos
                 return {
                     ...state,
                     allCountries:state.copyCountries
                 }
             }
-            const filterCountries=state.allCountries.filter((elem)=>elem[attribute]===value)
-            return{
-                ...state,
-                allCountries:filterCountries
-            }
+            const filterCountries=state.allCountries.filter((elem)=>elem[attribute]===value)            
+            if(filterCountries.length>0){
+                return{
+                    ...state,
+                    allCountries:filterCountries
+                }
+            } else {
+                return{
+                    ...state,
+                    allCountries:{error:'There are no matches'}
+                }
+            }            
                                             
-        case FILTER_ACTIVITIES:                                                          
-            //const filterForActivities=state.allCountries.filter((country)=>country.Activities.filter((elem)=>elem.name===action.payload).length > 0)            
+        case FILTER_ACTIVITIES:              
             if(action.payload==='') { //todos
                 return {
                     ...state,
@@ -71,9 +77,11 @@ export const rootReducer = (state=initialState,action)=>{
                 }
             }
             const filterForActivities=state.activities.find((activity)=>activity.name===action.payload) // accedo a mi estado activities y filtro por nomobre de actividad            
+             
             return{
                 ...state,
-                allCountries:filterForActivities.Countries // en .Countries se encuentra la info de los paises q tienen dicha actividad, esto viene de la tabla intermedia
+                allCountries:filterForActivities.Countries, // en .Countries se encuentra la info de los paises q tienen dicha actividad, esto viene de la tabla intermedia
+                copyCountries:filterForActivities.Countries 
             }
         
         case ORDER:

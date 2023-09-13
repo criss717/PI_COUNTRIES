@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { postActivity, getActivities, getAll } from '../../Redux/actions/actions'
 import s from '../Form/Form.module.css'
 import validation from './validation'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import CustomCard from '../CustomCard/CustomCard'
 
 const Form = () => {
@@ -13,7 +13,7 @@ const Form = () => {
     const dispatch = useDispatch()    
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search); // para obtener las opciones de la url '/activities?id=abc
-    const idDetail = queryParams.get('id');
+    const idDetail = queryParams.get('id');  
 
     //estados
     const [form, setForm] = useState({
@@ -34,6 +34,7 @@ const Form = () => {
     useEffect(()=>{        
         setErrrors(validation({...form})) // me sirve para actualizar los errores en la parte de validation, para enviar un [] cuando eliminemos todas las banderas y tmbn deshabilito el boton apenas se monta el componente
         setSelectedCountry('') // para volver a "selected country" en mi select de html
+        dispatch(getAll()) // para limpiar movidas de los filtros en mi estado global
     },[form])
     
     //handlers
