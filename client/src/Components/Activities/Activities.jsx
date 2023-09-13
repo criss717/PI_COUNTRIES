@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import CardActivity from '../CardActivity/CardActivity';
-import { Link } from 'react-router-dom';
 import s from '../Activities/Activities.module.css'
 const Activities = () => {
     //hooks
