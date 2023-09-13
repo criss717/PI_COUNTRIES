@@ -12,11 +12,19 @@ const { DB_USER, DB_PASSWORD, DB_HOST,DB_DEPLOY} = process.env;
 //   native: false, 
 // });
 
-const sequelize = new Sequelize(DB_DEPLOY, {
-  logging: false, 
-  native: false, 
-  ssl:true
+const sequelize = new Sequelize(DB_DEPLOY, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: 'postgres',
+  logging: false,
+  native: false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Solo si tu certificado SSL no es verificado por una autoridad reconocida
+    }
+  }
 });
+
 // const basename = path.basename(__filename);
 
 // const modelDefiners = [];
