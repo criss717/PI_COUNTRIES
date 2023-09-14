@@ -6,6 +6,7 @@ export default function validation({name,difficulty,duration,season,countries}){
     else {
         if(!regexName.test(name)) errors.name='Este campo no puede tener numeros'
         else if(name.length<3) errors.name='El nombre debe tener al menos 3 caracteres'
+        else if(name.length>150) errors.name='El nombre no puede tener mas de 150 caracteres'
     }
     
     if(!difficulty) errors.difficulty='Campo requerido'

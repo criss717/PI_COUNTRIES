@@ -12,7 +12,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST,DB_DEPLOY} = process.env;
 //   native: false, 
 // });
 
-const sequelize = new Sequelize(DB_DEPLOY, {  
+const sequelize = new Sequelize(DB_DEPLOY, {  //para deploy
   dialect: 'postgres',
   logging: false,
   native: false,

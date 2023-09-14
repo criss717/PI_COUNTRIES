@@ -64,13 +64,13 @@ const Detail = () => {
 
                 </div>
             </div>         
-            {/* <div className={s.map}> 
+            <div className={s.map}> 
                 {
                     latitude && longitude && <Maps lat={latitude} lon={longitude} area={countryDetail.area}/> 
                 }             
                 <a href={countryDetail.maps}>See the larger map</a>  
                              
-            </div>        */}
+            </div>       
         </div>
     );
 }

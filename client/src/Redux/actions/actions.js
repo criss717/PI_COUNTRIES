@@ -1,6 +1,6 @@
 import { GET_COUNTRY, GET_ALL_COUNTRIES,GET_DETAIL,CLEAN_DETAIL,FILTER_COUNTRIES,FILTER_ACTIVITIES,ORDER, POST_ACTIVITY, GET_ACTIVITIES } from "./types"
 import axios from "axios"
-import { BASE_URL } from "../../falseEnv"
+import  BASE_URL  from "../../falseEnv"
 
 export const getAll= ()=>{
     return async(dispatch) => {
