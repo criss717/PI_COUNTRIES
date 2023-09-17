@@ -14,7 +14,7 @@ const Cards = () => {
     const dispatch = useDispatch() // para ejecutar las acciones getAll, filter y order,    
     useEffect(()=>{ 
         if (allActivities.length === 0) dispatch(getActivities());  
-        if(!allCountries.error) dispatch(getAll())              
+        if(!allCountries.error) dispatch(getAll())                     
     },[]) 
 
     //Funcionalidades // estados
@@ -44,6 +44,10 @@ const Cards = () => {
         })
     }
     const handlerSelect=(e)=>{
+        setCurrentPage({  // volver a la pag.1
+            initialIndex:0,
+            finalIndex:cardsForPage   
+        }) 
         const attribute = e.target.name;
         const value = e.target.value 
         if(attribute === 'continents'){
@@ -66,6 +70,10 @@ const Cards = () => {
         setSelectedFilters('');// reseteamos los valores del select del filter continent
         setSelectFilterActiviy('') // reseteamos los valores del select del filter by activity
         dispatch(getAll())
+        setCurrentPage({  // volver a la pag 1..
+            initialIndex:0,
+            finalIndex:cardsForPage   
+        }) 
     }
 
     return ( 
